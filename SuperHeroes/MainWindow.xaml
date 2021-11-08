@@ -1,0 +1,49 @@
+﻿<Window x:Class="SuperHeroes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuperHeroes"
+        mc:Ignorable="d"
+        Title="Superheroes" Icon="assets/shield.ico" Height="450" Width="800">
+    <Window.Resources>
+        <local:ConverFondo x:Key="convFondo"></local:ConverFondo>
+    </Window.Resources>
+
+    <DockPanel x:Name="fondoHeroe"  Background="{Binding Path=Heroe,Converter={StaticResource convFondo}}">
+
+        <DockPanel VerticalAlignment="Center" LastChildFill="False" DockPanel.Dock="Top">
+
+            <TextBlock x:Name="nombreHeroe" DockPanel.Dock="Left" Text="{Binding Path=Nombre}" ></TextBlock>
+
+            <StackPanel Margin="5" DockPanel.Dock="Right" Orientation="Horizontal">
+                <Image Source="{Binding Path=Vengador}" Height="55"></Image>
+                <Image Source="{Binding Path=Xmen}" Height="55"></Image>
+            </StackPanel>
+
+        </DockPanel>
+
+        
+        
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+
+            <Image Source="assets/arrow.png" Height="30" Width="40"></Image>
+            
+            <TextBlock VerticalAlignment="Center" Text="1/3" FontWeight="Bold"></TextBlock>
+            
+            <Image  Source="assets/arrow.png" Height="30" Width="40" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            
+        </StackPanel>
+        
+        <Image x:Name="imagenHeroe" Source="{Binding Path=Imagen}" Stretch="UniformToFill"></Image>
+    </DockPanel>
+</Window>
