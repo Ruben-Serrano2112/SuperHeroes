@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace SuperHeroes
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
 
     public partial class MainWindow : Window
     {
@@ -29,6 +26,7 @@ namespace SuperHeroes
             List<Superheroe> listaheroes = Superheroe.GetSamples();
             nombreHeroe.DataContext = listaheroes[contador];
             imagenHeroe.DataContext = listaheroes[contador];
+            
 
         }
 
@@ -47,17 +45,20 @@ namespace SuperHeroes
     }
     public class ConverFondo : IValueConverter
     {
+
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Superheroe heroe = new Superheroe();
             bool fondo = heroe.Heroe;
             if (fondo)
             {
-                return "PaleGreen";
+
+                return Colors.PaleGreen;
             }
             else
             {
-                return "IndianRed";
+                return Colors.IndianRed;
             }
         }
 
