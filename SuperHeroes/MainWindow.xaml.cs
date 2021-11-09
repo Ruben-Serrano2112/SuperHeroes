@@ -20,27 +20,60 @@ namespace SuperHeroes
     public partial class MainWindow : Window
     {
         int contador = 0;
+        List<Superheroe> listaheroes = Superheroe.GetSamples();
         public MainWindow()
         {
             InitializeComponent();
-            List<Superheroe> listaheroes = Superheroe.GetSamples();
-            nombreHeroe.DataContext = listaheroes[contador];
-            imagenHeroe.DataContext = listaheroes[contador];
+
+            DataContext = listaheroes[contador];
             
 
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Image_MouseLeftButtonDownDerecha(object sender, MouseButtonEventArgs e)
         {
-            if (contador > 3 | contador < 0)
+            if (contador!=3)
             {
-                contador = contador;
+                contador++;
+                HeroeActual.Text = contador + "/3";
+                DataContext = listaheroes[contador-1];
             }
             else
             {
                 contador++;
             }
 
+        }
+        private void Image_MouseLeftButtonDownIzquierda(object sender, MouseButtonEventArgs e)
+        {
+            if (contador != 1)
+            {
+                contador--;
+                HeroeActual.Text = contador + "/3";
+                DataContext = listaheroes[contador-1];
+            }
+
+        }
+    }
+    public class ConverVisibilidad : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool fondo = (bool)value;
+            if (fondo)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
     public class ConverFondo : IValueConverter
@@ -49,16 +82,14 @@ namespace SuperHeroes
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Superheroe heroe = new Superheroe();
-            bool fondo = heroe.Heroe;
+            bool fondo = (bool)value;
             if (fondo)
             {
-
-                return Colors.PaleGreen;
+                return Brushes.PaleGreen;
             }
             else
             {
-                return Colors.IndianRed;
+                return Brushes.IndianRed;
             }
         }
 

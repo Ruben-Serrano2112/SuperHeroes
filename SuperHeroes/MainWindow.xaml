@@ -8,17 +8,18 @@
         Title="Superheroes" Icon="assets/shield.ico" Height="450" Width="800">
     <Window.Resources>
         <local:ConverFondo x:Key="convFondo"></local:ConverFondo>
+        <local:ConverVisibilidad x:Key="convVisible"></local:ConverVisibilidad>
     </Window.Resources>
 
     <DockPanel x:Name="fondoHeroe"  Background="{Binding Path=Heroe,Converter={StaticResource convFondo}}">
 
         <DockPanel VerticalAlignment="Center" LastChildFill="False" DockPanel.Dock="Top">
 
-            <TextBlock x:Name="nombreHeroe" DockPanel.Dock="Left" Text="{Binding Path=Nombre}" ></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  x:Name="nombreHeroe" DockPanel.Dock="Left" Text="{Binding Path=Nombre}" ></TextBlock>
 
             <StackPanel Margin="5" DockPanel.Dock="Right" Orientation="Horizontal">
-                <Image Source="{Binding Path=Vengador}" Height="55"></Image>
-                <Image Source="{Binding Path=Xmen}" Height="55"></Image>
+                <Image Source="assets/avengers.png"  Visibility="{Binding Path=Vengador,Converter={StaticResource convVisible}}" Height="55"></Image>
+                <Image Source="assets/xmen.png" Visibility="{Binding Path=Xmen,Converter={StaticResource convVisible}}" Height="55"></Image>
             </StackPanel>
 
         </DockPanel>
@@ -27,11 +28,11 @@
         
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
 
-            <Image Source="assets/arrow.png" Height="30" Width="40"></Image>
+            <Image MouseLeftButtonDown="Image_MouseLeftButtonDownIzquierda" Source="assets/arrow.png" Height="30" Width="40"></Image>
             
-            <TextBlock VerticalAlignment="Center" Text="1/3" FontWeight="Bold"></TextBlock>
-            
-            <Image  Source="assets/arrow.png" Height="30" Width="40" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+            <TextBlock x:Name="HeroeActual" VerticalAlignment="Center" Text="1/3" FontWeight="Bold"></TextBlock>
+
+            <Image  Source="assets/arrow.png" Height="30" Width="40" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="Image_MouseLeftButtonDownDerecha">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="-1"/>
