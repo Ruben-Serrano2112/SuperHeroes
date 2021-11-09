@@ -36,6 +36,7 @@ namespace SuperHeroes
             {
                 contador++;
                 HeroeActual.Text = contador + "/3";
+                // DataContext actualiza la aplicacion para que cambie, en esta caso cambia el heroe
                 DataContext = listaheroes[contador-1];
             }
             else
